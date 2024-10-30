@@ -1,11 +1,15 @@
 package mainPackage;
+import java.util.Random;
 
 public class Main {
 
-
+    static int currentColumn = 1;
     static int mapWidth = 10;
     static int mapLength = 50;
     static int[][] mapFrame = new int[mapWidth][mapLength];
+
+    static int pipesHorizontalGap = 4;
+    static int pipesVerticalGap = 3;
 
 
     public static void formatMap(int[][] mapFrame) {
@@ -17,6 +21,42 @@ public class Main {
             }
         }
     }
+
+    public static void createPipe() {
+
+        currentColumn = currentColumn + pipesHorizontalGap;
+
+        Random random = new Random();
+        int upperPipeTip = 0;
+
+        for (int i = 1; i < mapWidth - 1; i++) {
+            mapFrame[i][currentColumn] = 1;
+        }
+
+        upperPipeTip = random.nextInt(mapWidth - 2) + 2;
+
+        if(upperPipeTip + 3 < mapWidth) {
+            for(int i = upperPipeTip; i < upperPipeTip + 3; i++) {
+                mapFrame[i][currentColumn] = 0;
+            }
+        } else if(upperPipeTip + 2 < mapWidth) {
+            mapFrame[upperPipeTip - 1][currentColumn] = 0;
+            mapFrame[upperPipeTip][currentColumn] = 0;
+            mapFrame[upperPipeTip + 1][currentColumn] = 0;
+        } else if(upperPipeTip + 1 < mapWidth) {
+            mapFrame[upperPipeTip][currentColumn] = 0;
+            mapFrame[upperPipeTip - 1][currentColumn] = 0;
+            mapFrame[upperPipeTip - 2][currentColumn] = 0;
+        } else if(upperPipeTip == mapWidth - 1) {
+            mapFrame[upperPipeTip - 1][currentColumn] = 0;
+            mapFrame[upperPipeTip - 2][currentColumn] = 0;
+            mapFrame[upperPipeTip - 3][currentColumn] = 0;
+        }
+
+
+    }
+
+
 
     public static void printMap(int[][] mapFrame, int mapType){
         for(int i = 0; i < mapWidth; i++) {
@@ -39,6 +79,9 @@ public class Main {
 
     public static void main(String[] args) {
         formatMap(mapFrame);
+        createPipe();
+
+
         printMap(mapFrame, 2);
     }
 }

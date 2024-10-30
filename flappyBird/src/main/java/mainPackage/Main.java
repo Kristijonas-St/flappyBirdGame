@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Main {
 
-    static int currentColumn = 1;
+    static int currentColumn = 0;
     static int mapWidth = 10;
     static int mapLength = 50;
     static int[][] mapFrame = new int[mapWidth][mapLength];
@@ -24,7 +24,6 @@ public class Main {
 
     public static void createPipe() {
         currentColumn += pipesHorizontalGap;
-
         Random random = new Random();
 
         for (int i = 1; i < mapWidth - 1; i++) {
@@ -33,15 +32,21 @@ public class Main {
 
         int upperPipeTip = random.nextInt(mapWidth - 5) + 1;  // Allows space for a gap within bounds
 
-        int gapHeight = 3;
-        for (int i = 0; i < gapHeight; i++) {
+        for (int i = 0; i < pipesVerticalGap; i++) {
             if (upperPipeTip + i < mapWidth - 1) {
                 mapFrame[upperPipeTip + i][currentColumn] = 0;
             }
         }
     }
 
-    
+    public static void generatePipesForWholeMap() {
+        currentColumn = 1;  // Reset the column position to start at the beginning
+        while (currentColumn < mapLength - 1) {  // Loop until the end of mapLength
+            createPipe();
+        }
+    }
+
+
     public static void printMap(int[][] mapFrame, int mapType){
         for(int i = 0; i < mapWidth; i++) {
             for(int j = 0; j < mapLength; j++){
@@ -65,7 +70,9 @@ public class Main {
 
 
         formatMap(mapFrame);
-        createPipe();
+        //createPipe();
+
+        generatePipesForWholeMap();
 
         printMap(mapFrame, 2);
     }

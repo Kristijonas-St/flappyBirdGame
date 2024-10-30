@@ -3,14 +3,16 @@ import java.util.Random;
 
 public class Main {
 
+
+    //System.out.println( '\u263A' ); // Smiley Face symbol
+
     static int currentColumn = 0;
-    static int mapWidth = 10;
-    static int mapLength = 50;
+    static int mapWidth = 15;
+    static int mapLength = 100;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 
-    static int pipesHorizontalGap = 5;
-    static int pipesVerticalGap = 3;
-
+    static int pipesHorizontalGap = 6;
+    static int pipesVerticalGap = 4;
 
     public static void formatMap(int[][] mapFrame) {
         for(int i = 0; i < mapWidth; i++){
@@ -43,7 +45,7 @@ public class Main {
 
     public static void generatePipesForWholeMap() {
         while (currentColumn < mapLength) {
-            currentColumn = currentColumn + pipesHorizontalGap;
+            currentColumn += pipesHorizontalGap;
             createPipe();
         }
     }
@@ -59,7 +61,7 @@ public class Main {
                     if(mapFrame[i][j] == 1) {
                         System.out.print("#" + " ");
                     } else {
-                        System.out.print("." + " ");
+                        System.out.print(" " + " ");
                     }
                 }
 
@@ -70,10 +72,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         formatMap(mapFrame);
         generatePipesForWholeMap();
 
         printMap(mapFrame, 2);
+
     }
 }

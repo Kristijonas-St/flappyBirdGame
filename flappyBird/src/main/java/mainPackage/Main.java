@@ -23,41 +23,25 @@ public class Main {
     }
 
     public static void createPipe() {
-
-        currentColumn = currentColumn + pipesHorizontalGap;
+        currentColumn += pipesHorizontalGap;
 
         Random random = new Random();
-        int upperPipeTip = 0;
 
         for (int i = 1; i < mapWidth - 1; i++) {
             mapFrame[i][currentColumn] = 1;
         }
 
-        upperPipeTip = random.nextInt(mapWidth - 2) + 2;
+        int upperPipeTip = random.nextInt(mapWidth - 5) + 1;  // Allows space for a gap within bounds
 
-        if(upperPipeTip + 3 < mapWidth) {
-            for(int i = upperPipeTip; i < upperPipeTip + 3; i++) {
-                mapFrame[i][currentColumn] = 0;
+        int gapHeight = 3;
+        for (int i = 0; i < gapHeight; i++) {
+            if (upperPipeTip + i < mapWidth - 1) {
+                mapFrame[upperPipeTip + i][currentColumn] = 0;
             }
-        } else if(upperPipeTip + 2 < mapWidth) {
-            mapFrame[upperPipeTip - 1][currentColumn] = 0;
-            mapFrame[upperPipeTip][currentColumn] = 0;
-            mapFrame[upperPipeTip + 1][currentColumn] = 0;
-        } else if(upperPipeTip + 1 < mapWidth) {
-            mapFrame[upperPipeTip][currentColumn] = 0;
-            mapFrame[upperPipeTip - 1][currentColumn] = 0;
-            mapFrame[upperPipeTip - 2][currentColumn] = 0;
-        } else if(upperPipeTip == mapWidth - 1) {
-            mapFrame[upperPipeTip - 1][currentColumn] = 0;
-            mapFrame[upperPipeTip - 2][currentColumn] = 0;
-            mapFrame[upperPipeTip - 3][currentColumn] = 0;
         }
-
-
     }
 
-
-
+    
     public static void printMap(int[][] mapFrame, int mapType){
         for(int i = 0; i < mapWidth; i++) {
             for(int j = 0; j < mapLength; j++){
@@ -78,9 +62,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
+
         formatMap(mapFrame);
         createPipe();
-
 
         printMap(mapFrame, 2);
     }

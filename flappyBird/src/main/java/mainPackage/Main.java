@@ -8,7 +8,7 @@ public class Main {
     static int mapLength = 50;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 
-    static int pipesHorizontalGap = 4;
+    static int pipesHorizontalGap = 5;
     static int pipesVerticalGap = 3;
 
 
@@ -23,25 +23,27 @@ public class Main {
     }
 
     public static void createPipe() {
-        currentColumn += pipesHorizontalGap;
+        int upperPipeTip = 0;
         Random random = new Random();
 
-        for (int i = 1; i < mapWidth - 1; i++) {
-            mapFrame[i][currentColumn] = 1;
-        }
+        if(currentColumn < mapLength) {
+            for (int i = 1; i < mapWidth - 1; i++) {
+                mapFrame[i][currentColumn] = 1;
+            }
+            upperPipeTip = random.nextInt(mapWidth - 5) + 1;
 
-        int upperPipeTip = random.nextInt(mapWidth - 5) + 1;  // Allows space for a gap within bounds
-
-        for (int i = 0; i < pipesVerticalGap; i++) {
-            if (upperPipeTip + i < mapWidth - 1) {
-                mapFrame[upperPipeTip + i][currentColumn] = 0;
+            for (int i = 0; i < pipesVerticalGap; i++) {
+                if (upperPipeTip + i < mapWidth - 1) {
+                    mapFrame[upperPipeTip + i][currentColumn] = 0;
+                }
             }
         }
+
     }
 
     public static void generatePipesForWholeMap() {
-        currentColumn = 1;  // Reset the column position to start at the beginning
-        while (currentColumn < mapLength - 1) {  // Loop until the end of mapLength
+        while (currentColumn < mapLength) {
+            currentColumn = currentColumn + pipesHorizontalGap;
             createPipe();
         }
     }
@@ -70,8 +72,6 @@ public class Main {
 
 
         formatMap(mapFrame);
-        //createPipe();
-
         generatePipesForWholeMap();
 
         printMap(mapFrame, 2);

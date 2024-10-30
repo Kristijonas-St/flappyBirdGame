@@ -1,17 +1,34 @@
 package mainPackage;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+    static int mapWidthStart = 0, mapWidthEnd = 10;
+    static int mapLengthStart = 0, mapLengthEnd = 30;
+    static int[][] mapFrame = new int[mapWidthEnd][mapLengthEnd];
+
+
+    public static void formatMap(int[][] mapFrame) {
+        for(int i = 0; i < mapWidthEnd; i++){
+            for(int j = 0; j < mapLengthEnd; j++){
+                if(i == mapWidthStart || i == mapWidthEnd - 1 || j == mapLengthStart || j == mapLengthEnd - 1) {
+                    mapFrame[i][j] = 1;
+                }
+            }
         }
+    }
+
+    public static void printMap(int[][] mapFrame){
+        for(int i = 0; i < mapWidthEnd; i++) {
+            for(int j = 0; j < mapLengthEnd; j++){
+                System.out.print(mapFrame[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        formatMap(mapFrame);
+        printMap(mapFrame);
     }
 }

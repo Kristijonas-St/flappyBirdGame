@@ -72,9 +72,7 @@ public class Map {
 
 
     public static void modifyMap(int height, int length, int value) {
-        if(mapFrame[height][length] == 0) {
-            mapFrame[height][length] = value;
-        }
+        mapFrame[height][length] = value;
     }
 
 

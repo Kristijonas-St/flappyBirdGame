@@ -45,12 +45,29 @@ public class Bird extends JFrame implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            length++;
-        } else if(e.getKeyCode() == KeyEvent.VK_UP) {
-            height--;
+
+        int previousLength = length;
+        int previousHeight = height;
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                height--;
+                break;
+            case KeyEvent.VK_DOWN:
+                height++;
+                break;
+            case KeyEvent.VK_LEFT:
+                length--;
+                break;
+            case KeyEvent.VK_RIGHT:
+                length++;
+                break;
         }
+
+        Map.modifyMap(previousHeight, previousLength, 0);
         Map.modifyMap(height, length, 2);
+
         Map.printMap(2);
     }
+
 }

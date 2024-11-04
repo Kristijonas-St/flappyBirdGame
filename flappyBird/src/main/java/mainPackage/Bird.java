@@ -10,8 +10,8 @@ public class Bird extends JFrame implements KeyListener {
 
     Bird() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Bird");
-        this.setSize(500, 500);
+        this.setTitle("Flappy Bird Game");
+        this.setSize(800, 500);
         this.setLayout(null);
         this.addKeyListener(this);
         this.setVisible(true);
@@ -25,27 +25,30 @@ public class Bird extends JFrame implements KeyListener {
         length = 1;
     }
 
-    public int getHeight() {
-        return height;
-    }
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        int cellSize = 20;
+        int[][] map = Map.getMapFrame();
 
-    public int getLength() {
-        return length;
+        for (int i = 0; i < Map.getMapWidth(); i++) {
+            for (int j = 0; j < Map.getMapLength(); j++) {
+                if (map[i][j] == 1) {
+                    g.setColor(Color.GREEN);
+                    g.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                } else if (map[i][j] == 2) {
+                    g.setColor(Color.RED);
+                    g.fillOval(j * cellSize, i * cellSize, cellSize, cellSize);
+                }
+            }
+        }
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) { }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
         int previousLength = length;
         int previousHeight = height;
 
@@ -68,6 +71,10 @@ public class Bird extends JFrame implements KeyListener {
         Map.modifyMap(height, length, 2);
 
         Map.printMap(2);
+        repaint();
     }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
 
 }

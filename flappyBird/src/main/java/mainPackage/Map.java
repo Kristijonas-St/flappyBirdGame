@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Map {
     static int currentColumn = 0;
-    static int mapWidth = 15;
+    static int mapWidth = 20;
     static int mapLength = 100;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 

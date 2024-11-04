@@ -47,22 +47,33 @@ public class Map {
         }
     }
 
-    public static void printMap(int mapType){
-        for(int i = 0; i < Map.getMapWidth(); i++) {
-            for(int j = 0; j < Map.getMapLength(); j++){
-
-                if(mapType == 1) {
+    public static void printMap(int mapType) {
+        for (int i = 0; i < Map.getMapWidth(); i++) {
+            for (int j = 0; j < Map.getMapLength(); j++) {
+                if (mapType == 1) {
                     System.out.print(mapFrame[i][j] + " ");
                 } else if (mapType == 2) {
-                    if(mapFrame[i][j] == 1) {
-                        System.out.print("#" + " ");
-                    } else {
-                        System.out.print(" " + " ");
+                    switch (mapFrame[i][j]) {
+                        case 0:
+                            System.out.print("  ");
+                            break;
+                        case 1:
+                            System.out.print("# ");
+                            break;
+                        case 2:
+                            System.out.print("O ");
+                            break;
                     }
                 }
-
             }
             System.out.println();
+        }
+    }
+
+
+    public static void modifyMap(int height, int length, int value) {
+        if(mapFrame[height][length] == 0) {
+            mapFrame[height][length] = value;
         }
     }
 

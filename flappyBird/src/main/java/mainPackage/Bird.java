@@ -1,19 +1,56 @@
 package mainPackage;
 
-public class Bird {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Bird extends JFrame implements KeyListener {
 
 
-    private int height, distance;
+    Bird() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Bird");
+        this.setSize(500, 500);
+        this.setLayout(null);
+        this.addKeyListener(this);
+        this.setVisible(true);
+    }
+
+    static int height, length;
 
     public static void spawnBird() {
         Map.modifyMap(Map.getMapWidth() / 2, 1, 2);
+        height = Map.getMapWidth() / 2;
+        length = 1;
     }
 
     public int getHeight() {
         return height;
     }
 
-    public int getDistance() {
-        return distance;
+    public int getLength() {
+        return length;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            length++;
+        } else if(e.getKeyCode() == KeyEvent.VK_UP) {
+            height--;
+        }
+        Map.modifyMap(height, length, 2);
+        Map.printMap(2);
     }
 }

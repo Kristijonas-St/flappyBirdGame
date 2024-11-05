@@ -7,12 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Map.formatMap();
         Map.generatePipesForWholeMap();
-
         new Bird();
 
         Bird.spawnBird();
-
-
 
     }
 }

@@ -5,8 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Bird extends JFrame implements KeyListener {
-
+public class Bird extends JFrame implements KeyListener, Runnable {
 
     Bird() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,7 +23,6 @@ public class Bird extends JFrame implements KeyListener {
         height = Map.getMapWidth() / 2;
         length = 1;
     }
-
 
     public static void obstacleDetection(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -82,7 +80,27 @@ public class Bird extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent e) { }
 
     @Override
+    public void run() {
+        int lengthIndex = length;
+        while (true) {
+
+            Map.modifyMap(height, lengthIndex, 2);
+            try {
+                Thread.sleep(700);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            repaint();
+            lengthIndex++;
+        }
+    }
+
+    @Override
     public void keyPressed(KeyEvent e) {
+        if ((height == Map.getMapWidth() / 2) && length == 1) {
+            new Thread(this).start();
+        }
+
         int previousLength = length;
         int previousHeight = height;
 
@@ -97,4 +115,8 @@ public class Bird extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) { }
 
+    public static void main(String[] args) {
+        Bird bird = new Bird();
+        bird.spawnBird();
+    }
 }

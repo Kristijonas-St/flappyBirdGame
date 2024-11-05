@@ -75,6 +75,14 @@ public class Map {
         mapFrame[height][length] = value;
     }
 
+    public static boolean thereIsObstacleAhead(int height, int length) {
+        if(mapFrame[height][length] == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     public static int getCurrentColumn() {

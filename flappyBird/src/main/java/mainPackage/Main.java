@@ -12,7 +12,6 @@ public class Main {
 
         Bird.spawnBird();
 
-        Map.printMap(2);
 
 
     }

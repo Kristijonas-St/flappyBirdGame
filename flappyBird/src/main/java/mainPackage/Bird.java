@@ -54,23 +54,38 @@ public class Bird extends JFrame implements KeyListener {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                height--;
+                if(Map.thereIsObstacleAhead(height - 1, length)) {
+                    System.out.println("Obstacle hit");
+                } else {
+                    height--;
+                }
                 break;
             case KeyEvent.VK_DOWN:
-                height++;
+                if(Map.thereIsObstacleAhead(height + 1, length)) {
+                    System.out.println("Obstacle hit");
+                } else {
+                    height++;
+                }
                 break;
             case KeyEvent.VK_LEFT:
-                length--;
+                if(Map.thereIsObstacleAhead(height, length - 1)) {
+                    System.out.println("Obstacle hit");
+                } else {
+                    length--;
+                }
                 break;
             case KeyEvent.VK_RIGHT:
-                length++;
+                if(Map.thereIsObstacleAhead(height, length + 1)) {
+                    System.out.println("Obstacle hit");
+                } else {
+                    length++;
+                }
                 break;
         }
 
         Map.modifyMap(previousHeight, previousLength, 0);
         Map.modifyMap(height, length, 2);
 
-        Map.printMap(2);
         repaint();
     }
 

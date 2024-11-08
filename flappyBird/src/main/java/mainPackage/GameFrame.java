@@ -42,12 +42,15 @@ public class GameFrame extends JFrame implements KeyListener {
         int previousLength = Bird.getLength();
         int previousHeight = Bird.getHeight();
 
-        System.out.println("button pressed");
         Bird.obstacleDetection(e);
-
         Map.modifyMap(previousHeight, previousLength, 0);
         Map.modifyMap(Bird.getHeight(), Bird.getLength(), 2);
 
+
+        updateGamePanel();
+    }
+
+    public void updateGamePanel() {
         repaint();
     }
 

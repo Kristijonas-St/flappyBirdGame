@@ -16,7 +16,6 @@ public class Bird {
         length = 1;
     }
 
-
     public static void obstacleDetection(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
@@ -49,6 +48,20 @@ public class Bird {
                 break;
         }
     }
+
+    public static void passivelyMoveRight() {
+        if (Map.thereIsObstacleAhead(height, length + 1)) {
+            System.out.println("Obstacle hit - cannot move right");
+            return;
+        }
+
+        Map.modifyMap(height, length, 0);
+
+        length++;
+        Map.modifyMap(height, length, 2);
+    }
+
+
 
     public static int getHeight() {
         return height;

@@ -10,7 +10,18 @@ public class Main {
         Bird.spawnBird();
 
         new GameFrame();
+        GameFrame gameFrame = new GameFrame();
 
+
+        while(true) {
+            Bird.passivelyMoveRight();
+            gameFrame.updateGamePanel();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 
 

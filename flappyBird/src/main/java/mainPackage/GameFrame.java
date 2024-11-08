@@ -29,6 +29,9 @@ public class GameFrame extends JFrame implements KeyListener {
                 } else if (map[i][j] == 2) {
                     g.setColor(Color.RED);
                     g.fillOval(j * cellSize, i * cellSize, cellSize, cellSize);
+                } else if(map[i][j] == 3) {
+                    g.setColor(Color.black);
+                    g.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }
             }
         }
@@ -36,11 +39,11 @@ public class GameFrame extends JFrame implements KeyListener {
         if(Main.gameOver) {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 24));
-            g.drawString("Game Over", getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
+            g.drawString("Game Over, final score: " + Main.score, getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
         } else {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 24));
-            g.drawString("EPIC FLAPPY BIRD GAME", getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
+            g.drawString("EPIC FLAPPY BIRD GAME, score: " + Main.score, getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
         }
 
     }

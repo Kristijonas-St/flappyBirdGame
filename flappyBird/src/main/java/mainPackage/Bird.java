@@ -88,6 +88,18 @@ public class Bird {
         return true;
     }
 
+    public static boolean passesThroughPipes() {
+        int[][] map = Map.getMapFrame();
+        int currentColumn = length;
+
+        for (int i = 0; i < Map.getMapWidth(); i++) {
+            if (map[i][currentColumn] == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
     public static int getHeight() {

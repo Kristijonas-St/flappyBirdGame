@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Main {
     static boolean gameOver = false;
+    static int score = 0;
 
     public static void main(String[] args) {
         Map.formatMap();
@@ -23,13 +24,16 @@ public class Main {
 
 
                 if(i == 1 && Bird.passivelyFallDown()) {
-                    System.out.println("Nachos");
                     gameFrame.updateGamePanel();
                     i = 0;
                 } else {
                     i++;
                 }
 
+                if(Bird.passesThroughPipes()) {
+                    System.out.println("passed through pipes");
+                    score++;
+                }
             } else {
                 gameOver = true;
                 gameFrame.updateGamePanel();

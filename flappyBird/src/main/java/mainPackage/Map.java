@@ -15,7 +15,7 @@ public class Map {
         for(int i = 0; i < mapWidth; i++){
             for(int j = 0; j < mapLength; j++){
                 if( (i == 0 || j == 0) || i == mapWidth - 1 || j == mapLength - 1) {
-                    mapFrame[i][j] = 1;
+                    mapFrame[i][j] = 3;
                 }
             }
         }
@@ -101,11 +101,5 @@ public class Map {
         return mapFrame;
     }
 
-    public static int getPipesHorizontalGap() {
-        return pipesHorizontalGap;
-    }
 
-    public static int getPipesVerticalGap() {
-        return pipesVerticalGap;
-    }
 }

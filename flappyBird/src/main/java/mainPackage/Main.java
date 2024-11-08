@@ -9,18 +9,22 @@ public class Main {
         Map.generatePipesForWholeMap();
         Bird.spawnBird();
 
-        new GameFrame();
         GameFrame gameFrame = new GameFrame();
 
 
         while(true) {
-            Bird.passivelyMoveRight();
-            gameFrame.updateGamePanel();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            if(Bird.passivelyMoveRight()) {
+                gameFrame.updateGamePanel();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println("Game over...");
+                break;
             }
+
         }
 
 

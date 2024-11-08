@@ -32,6 +32,17 @@ public class GameFrame extends JFrame implements KeyListener {
                 }
             }
         }
+
+        if(Main.gameOver) {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
+            g.drawString("Game Over", getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
+        } else {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
+            g.drawString("EPIC FLAPPY BIRD GAME", getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
+        }
+
     }
 
     @Override

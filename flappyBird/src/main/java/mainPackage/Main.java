@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Main {
+    static boolean gameOver = false;
 
     public static void main(String[] args) {
         Map.formatMap();
@@ -21,6 +22,8 @@ public class Main {
                     throw new RuntimeException(e);
                 }
             } else {
+                gameOver = true;
+                gameFrame.updateGamePanel();
                 System.out.println("Game over...");
                 break;
             }

@@ -8,7 +8,7 @@ public class Map {
     static int mapLength = 100;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 
-    static int pipesHorizontalGap = 8;
+    static int pipesHorizontalGap = 10;
     static int pipesVerticalGap = 4;
 
     public static void formatMap() {

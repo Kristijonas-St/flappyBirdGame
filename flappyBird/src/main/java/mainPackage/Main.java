@@ -11,6 +11,7 @@ public class Main {
         Bird.spawnBird();
         GameFrame gameFrame = new GameFrame();
 
+        int i = 0;
         while(true) {
             if(Bird.passivelyMoveRight()) {
                 gameFrame.updateGamePanel();
@@ -20,10 +21,15 @@ public class Main {
                     throw new RuntimeException(e);
                 }
 
-                if(Bird.passivelyFallDown()) {
+
+                if(i == 1 && Bird.passivelyFallDown()) {
                     System.out.println("Nachos");
                     gameFrame.updateGamePanel();
+                    i = 0;
+                } else {
+                    i++;
                 }
+
             } else {
                 gameOver = true;
                 gameFrame.updateGamePanel();

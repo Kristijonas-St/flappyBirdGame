@@ -9,7 +9,7 @@ public class GameFrame extends JFrame implements KeyListener {
     GameFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Flappy Bird Game");
-        this.setSize(800, 500);
+        this.setSize(1500, 500);
         this.setLayout(null);
         this.addKeyListener(this);
         this.setVisible(true);

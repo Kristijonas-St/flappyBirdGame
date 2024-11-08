@@ -17,41 +17,46 @@ public class Bird {
         length = 1;
     }
 
-    public static void obstacleDetection(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                if(Map.thereIsObstacleAhead(height - 1, length)) {
-                    System.out.println("Obstacle hit");
-                    birdHasHitObstacle = true;
-                } else {
-                    height--;
-                }
-                break;
-            case KeyEvent.VK_DOWN:
-                if(Map.thereIsObstacleAhead(height + 1, length)) {
-                    System.out.println("Obstacle hit");
-                    birdHasHitObstacle = true;
-                } else {
-                    height++;
-                }
-                break;
-            case KeyEvent.VK_LEFT:
-                if(Map.thereIsObstacleAhead(height, length - 1)) {
-                    System.out.println("Obstacle hit");
-                    birdHasHitObstacle = true;
-                } else {
-                    length--;
-                }
-                break;
-            case KeyEvent.VK_RIGHT:
-                if(Map.thereIsObstacleAhead(height, length + 1)) {
-                    System.out.println("Obstacle hit");
-                    birdHasHitObstacle = true;
-                } else {
-                    length++;
-                }
-                break;
+    public static boolean obstacleDetection(KeyEvent e) {
+        if(birdHasHitObstacle) {
+            return true;
+        } else {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    if(Map.thereIsObstacleAhead(height - 1, length)) {
+                        System.out.println("Upper obstacle hit");
+                        birdHasHitObstacle = true;
+                    } else {
+                        height--;
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if(Map.thereIsObstacleAhead(height + 1, length)) {
+                        System.out.println("Lower obstacle hit");
+                        birdHasHitObstacle = true;
+                    } else {
+                        height++;
+                    }
+                    break;
+                case KeyEvent.VK_LEFT:
+                    if(Map.thereIsObstacleAhead(height, length - 1)) {
+                        System.out.println("Left side obstacle hit");
+                        birdHasHitObstacle = true;
+                    } else {
+                        length--;
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if(Map.thereIsObstacleAhead(height, length + 1)) {
+                        System.out.println("Right side obstacle hit");
+                        birdHasHitObstacle = true;
+                    } else {
+                        length++;
+                    }
+                    break;
+            }
         }
+        return false;
 
     }
 
@@ -59,7 +64,7 @@ public class Bird {
         if (birdHasHitObstacle) {
             return false;
         } else if (Map.thereIsObstacleAhead(height, length + 1)) {
-            System.out.println("Obstacle hit - cannot move right");
+            System.out.println("PASSIVE right obstacle hit");
             birdHasHitObstacle = true;
         } else {
             Map.modifyMap(height, length, 0);

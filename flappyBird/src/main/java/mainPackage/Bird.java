@@ -74,6 +74,20 @@ public class Bird {
         return true;
     }
 
+    public static boolean passivelyFallDown() {
+        if (birdHasHitObstacle) {
+            return false;
+        } else if (Map.thereIsObstacleAhead(height + 1, length)) {
+            System.out.println("PASSIVE right obstacle hit");
+            birdHasHitObstacle = true;
+        } else {
+            Map.modifyMap(height, length, 0);
+            height++;
+            Map.modifyMap(height, length, 2);
+        }
+        return true;
+    }
+
 
 
     public static int getHeight() {

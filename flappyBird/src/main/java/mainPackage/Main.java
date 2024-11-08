@@ -9,17 +9,20 @@ public class Main {
         Map.formatMap();
         Map.generatePipesForWholeMap();
         Bird.spawnBird();
-
         GameFrame gameFrame = new GameFrame();
-
 
         while(true) {
             if(Bird.passivelyMoveRight()) {
                 gameFrame.updateGamePanel();
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
+                }
+
+                if(Bird.passivelyFallDown()) {
+                    System.out.println("Nachos");
+                    gameFrame.updateGamePanel();
                 }
             } else {
                 gameOver = true;

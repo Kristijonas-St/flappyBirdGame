@@ -81,7 +81,7 @@ public class Bird {
         }
         return true;
     }
-    
+
     public static boolean passesThroughPipes() {
         int[][] map = Map.getMapFrame();
         int currentColumn = length;
@@ -94,7 +94,18 @@ public class Bird {
         return false;
     }
 
+    public static boolean crashDown() {
+        int[][] map = Map.getMapFrame();
 
+        if (height + 1 >= Map.getMapWidth() || map[height + 1][length] == 1 || map[height + 1][length] == 3) {
+            return false;
+        } else {
+            Map.modifyMap(height, length, 0);
+            height++;
+            Map.modifyMap(height, length, 2);
+            return true;
+        }
+    }
 
     public static int getHeight() {
         return height;

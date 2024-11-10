@@ -33,7 +33,14 @@ public class Main {
                 }
             } else {
                 gameOver = true;
-                gameFrame.updateGamePanel();
+                while(Bird.crashDown()) {
+                    gameFrame.updateGamePanel();
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 break;
             }
 

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Map {
     static int currentColumn = 0;
     static int mapWidth = 20;
-    static int mapLength = 100;
+    static int mapLength = 50;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 
     static int pipesHorizontalGap = 10;
@@ -76,7 +76,7 @@ public class Map {
     }
 
     public static boolean thereIsObstacleAhead(int height, int length) {
-        if(mapFrame[height][length] == 1) {
+        if(mapFrame[height][length] == 1 || mapFrame[height][length] == 3) {
             return true;
         } else {
             return false;

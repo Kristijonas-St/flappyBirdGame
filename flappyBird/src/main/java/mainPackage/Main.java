@@ -22,22 +22,18 @@ public class Main {
                     throw new RuntimeException(e);
                 }
 
-
                 if(i == 1 && Bird.passivelyFallDown()) {
                     gameFrame.updateGamePanel();
                     i = 0;
                 } else {
                     i++;
                 }
-
                 if(Bird.passesThroughPipes()) {
-                    System.out.println("passed through pipes");
                     score++;
                 }
             } else {
                 gameOver = true;
                 gameFrame.updateGamePanel();
-                System.out.println("Game over...");
                 break;
             }
 

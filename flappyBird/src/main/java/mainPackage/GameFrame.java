@@ -18,33 +18,28 @@ public class GameFrame extends JFrame implements KeyListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        int cellSize = 20;
+        int cellSize = 20, yOffset = 30;
         int[][] map = Map.getMapFrame();
 
         for (int i = 0; i < Map.getMapWidth(); i++) {
             for (int j = 0; j < Map.getMapLength(); j++) {
                 if (map[i][j] == 1) {
                     g.setColor(Color.GREEN);
-                    g.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    g.fillRect(j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
                 } else if (map[i][j] == 2) {
                     g.setColor(Color.RED);
-                    g.fillOval(j * cellSize, i * cellSize, cellSize, cellSize);
+                    g.fillOval(j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
                 } else if(map[i][j] == 3) {
                     g.setColor(Color.black);
-                    g.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    g.fillRect(j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
                 }
             }
         }
 
-        if(Main.gameOver) {
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, 24));
-            g.drawString("Game Over, final score: " + Main.score, getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
-        } else {
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, 24));
-            g.drawString("EPIC FLAPPY BIRD GAME, score: " + Main.score, getWidth() / 2 - 50, Map.getMapWidth() * cellSize + 50);
-        }
+        String stringMessage = (Main.gameOver) ? "Game Over, final score: " + Main.score : "EPIC FLAPPY BIRD GAME, score: " + Main.score;
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 24));
+        g.drawString(stringMessage, getWidth() / 2 - 50,  yOffset + Map.getMapWidth() * cellSize + 50);
 
     }
 

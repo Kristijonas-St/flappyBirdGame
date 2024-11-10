@@ -24,7 +24,6 @@ public class Bird {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     if(Map.thereIsObstacleAhead(height - 1, length)) {
-                        System.out.println("Upper obstacle hit");
                         birdHasHitObstacle = true;
                     } else {
                         height--;
@@ -32,7 +31,6 @@ public class Bird {
                     break;
                 case KeyEvent.VK_DOWN:
                     if(Map.thereIsObstacleAhead(height + 1, length)) {
-                        System.out.println("Lower obstacle hit");
                         birdHasHitObstacle = true;
                     } else {
                         height++;
@@ -40,7 +38,6 @@ public class Bird {
                     break;
                 case KeyEvent.VK_LEFT:
                     if(Map.thereIsObstacleAhead(height, length - 1)) {
-                        System.out.println("Left side obstacle hit");
                         birdHasHitObstacle = true;
                     } else {
                         length--;
@@ -48,7 +45,6 @@ public class Bird {
                     break;
                 case KeyEvent.VK_RIGHT:
                     if(Map.thereIsObstacleAhead(height, length + 1)) {
-                        System.out.println("Right side obstacle hit");
                         birdHasHitObstacle = true;
                     } else {
                         length++;
@@ -64,7 +60,6 @@ public class Bird {
         if (birdHasHitObstacle) {
             return false;
         } else if (Map.thereIsObstacleAhead(height, length + 1)) {
-            System.out.println("PASSIVE right obstacle hit");
             birdHasHitObstacle = true;
         } else {
             Map.modifyMap(height, length, 0);
@@ -78,7 +73,6 @@ public class Bird {
         if (birdHasHitObstacle) {
             return false;
         } else if (Map.thereIsObstacleAhead(height + 1, length)) {
-            System.out.println("PASSIVE right obstacle hit");
             birdHasHitObstacle = true;
         } else {
             Map.modifyMap(height, length, 0);
@@ -87,7 +81,7 @@ public class Bird {
         }
         return true;
     }
-
+    
     public static boolean passesThroughPipes() {
         int[][] map = Map.getMapFrame();
         int currentColumn = length;

@@ -30,7 +30,7 @@ public class GameFrame extends JFrame implements KeyListener {
                     g.setColor(Color.RED);
                     g.fillOval(j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
                 } else if(map[i][j] == 3) {
-                    g.setColor(Color.black);
+                    g.setColor(Color.BLACK);
                     g.fillRect(j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
                 }
             }

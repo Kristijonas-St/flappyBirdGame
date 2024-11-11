@@ -20,7 +20,7 @@ public class Bird {
     public static boolean obstacleDetection(KeyEvent e) {
         if(birdHasHitObstacle) {
             return true;
-        } else if(Map.thereIsObstacleAhead(height + 1, length)) {
+        } else if(Map.thereIsObstacleAhead(height + 1, length) || Map.thereIsObstacleAhead(height, length)  ) {
             return true;
         } else {
             switch (e.getKeyCode()) {
@@ -36,20 +36,6 @@ public class Bird {
                         birdHasHitObstacle = true;
                     } else {
                         height++;
-                    }
-                    break;
-                case KeyEvent.VK_LEFT:
-                    if(Map.thereIsObstacleAhead(height, length - 1)) {
-                        birdHasHitObstacle = true;
-                    } else {
-                        length--;
-                    }
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    if(Map.thereIsObstacleAhead(height, length + 1)) {
-                        birdHasHitObstacle = true;
-                    } else {
-                        length++;
                     }
                     break;
             }

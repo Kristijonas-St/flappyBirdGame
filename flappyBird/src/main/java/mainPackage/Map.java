@@ -5,7 +5,7 @@ import java.util.Random;
 public class Map {
     static int currentColumn = 0;
     static int mapWidth = 20;
-    static int mapLength = 50;
+    static int mapLength = 70;
     static int[][] mapFrame = new int[mapWidth][mapLength];
 
     static int pipesHorizontalGap = 10;

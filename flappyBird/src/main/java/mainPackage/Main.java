@@ -18,7 +18,7 @@ public class Main {
             if(Bird.passivelyMoveRight()) {
                 gameFrame.updateGamePanel();
                 try {
-                    Thread.sleep(400);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

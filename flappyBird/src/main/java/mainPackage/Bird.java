@@ -20,6 +20,8 @@ public class Bird {
     public static boolean obstacleDetection(KeyEvent e) {
         if(birdHasHitObstacle) {
             return true;
+        } else if(Map.thereIsObstacleAhead(height + 1, length)) {
+            return true;
         } else {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:

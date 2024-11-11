@@ -12,6 +12,7 @@ public class Main {
         Bird.spawnBird();
         GameFrame gameFrame = new GameFrame();
 
+
         int i = 0;
         while(true) {
             if(Bird.passivelyMoveRight()) {
@@ -28,25 +29,25 @@ public class Main {
                 } else {
                     i++;
                 }
-                if(Bird.passesThroughPipes()) {
+                if(Bird.passesThroughPipes() && !Bird.birdHasHitObstacle) {
                     score++;
                 }
             } else {
-                gameOver = true;
-                while(Bird.crashDown()) {
-                    gameFrame.updateGamePanel();
-                    try {
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                if(Bird.birdHasHitObstacle) {
+                    gameOver = true;
+                    while(Bird.crashDown()) {
+                        gameFrame.updateGamePanel();
+                        try {
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+                    break;
                 }
-                break;
             }
 
         }
-
-
 
 
     }

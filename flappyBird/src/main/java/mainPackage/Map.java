@@ -31,11 +31,13 @@ public class Map {
             }
             upperPipeTip = random.nextInt(mapWidth - 5) + 1;
 
+
             for (int i = 0; i < pipesVerticalGap; i++) {
                 if (upperPipeTip + i < mapWidth - 1) {
                     mapFrame[upperPipeTip + i][currentColumn] = 0;
                 }
             }
+
         }
 
     }

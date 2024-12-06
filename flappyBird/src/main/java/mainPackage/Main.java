@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Main {
-    static boolean gameOver = false;
+    static boolean birdIsAlive = true;
     static int score = 0;
 
     public static void main(String[] args) {
@@ -14,7 +14,17 @@ public class Main {
         map.generatePipesForWholeMap();
 
         GameFrame gameFrame = new GameFrame(map, bird);
-        map.printMapInConsole();
+
+        bird.spawn(map);
+
+        while(true) {
+            if(bird.hasHitObstacle()) {
+                break;
+            } else {
+                bird.moveRight(map, gameFrame);
+            }
+
+        }
     }
 }
 

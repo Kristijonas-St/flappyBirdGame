@@ -7,48 +7,14 @@ public class Main {
     static int score = 0;
 
     public static void main(String[] args) {
-        Map.formatMap();
-        Map.generatePipesForWholeMap();
-        Bird.spawnBird();
-        GameFrame gameFrame = new GameFrame();
+        Map map = new Map();
+        Bird bird = new Bird();
 
+        map.formatMap();
+        map.generatePipesForWholeMap();
 
-        int i = 0;
-        while(true) {
-            if(Bird.passivelyMoveRight()) {
-                gameFrame.updateGamePanel();
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                if(i == 1 && Bird.passivelyFallDown()) {
-                    gameFrame.updateGamePanel();
-                    i = 0;
-                } else {
-                    i++;
-                }
-                if(Bird.passesThroughPipes() && !Bird.birdHasHitObstacle) {
-                    score++;
-                }
-            } else {
-                if(Bird.birdHasHitObstacle) {
-                    gameOver = true;
-                    while(Bird.crashDown()) {
-                        gameFrame.updateGamePanel();
-                        try {
-                            Thread.sleep(20);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    break;
-                }
-            }
-
-        }
-
-
+        GameFrame gameFrame = new GameFrame(map, bird);
+        map.printMapInConsole();
     }
 }
+

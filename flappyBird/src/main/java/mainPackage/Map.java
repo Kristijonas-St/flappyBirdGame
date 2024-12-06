@@ -3,15 +3,15 @@ package mainPackage;
 import java.util.Random;
 
 public class Map {
-    static int currentColumn = 0;
-    static int mapWidth = 20;
-    static int mapLength = 70;
-    static int[][] mapFrame = new int[mapWidth][mapLength];
+    protected int currentColumn = 0;
+    protected int mapWidth = 20;
+    protected int mapLength = 70;
+    protected int[][] mapFrame = new int[mapWidth][mapLength];
 
-    static int pipesHorizontalGap = 10;
-    static int pipesVerticalGap = 4;
+    protected int pipesHorizontalGap = 10;
+    protected int pipesVerticalGap = 4;
 
-    public static void formatMap() {
+    public void formatMap() {
         for(int i = 0; i < mapWidth; i++){
             for(int j = 0; j < mapLength; j++){
                 if( (i == 0 || j == 0) || i == mapWidth - 1 || j == mapLength - 1) {
@@ -21,7 +21,7 @@ public class Map {
         }
     }
 
-    public static void createPipe() {
+    public void createPipe() {
         int upperPipeTip = 0;
         Random random = new Random();
 
@@ -39,45 +39,29 @@ public class Map {
             }
 
         }
-
     }
 
-    public static void generatePipesForWholeMap() {
+    public void printMapInConsole() {
+        for(int i = 0; i < mapWidth; i++){
+            for(int j = 0; j < mapLength; j++){
+                System.out.print(mapFrame[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
+    }
+
+    public void generatePipesForWholeMap() {
         while (currentColumn < mapLength) {
             currentColumn += pipesHorizontalGap;
             createPipe();
         }
     }
 
-    public static void printMap(int mapType) {
-        for (int i = 0; i < Map.getMapWidth(); i++) {
-            for (int j = 0; j < Map.getMapLength(); j++) {
-                if (mapType == 1) {
-                    System.out.print(mapFrame[i][j] + " ");
-                } else if (mapType == 2) {
-                    switch (mapFrame[i][j]) {
-                        case 0:
-                            System.out.print("  ");
-                            break;
-                        case 1:
-                            System.out.print("# ");
-                            break;
-                        case 2:
-                            System.out.print("O ");
-                            break;
-                    }
-                }
-            }
-            System.out.println();
-        }
-    }
-
-
-    public static void modifyMap(int height, int length, int value) {
+    public void modifyMap(int height, int length, int value) {
         mapFrame[height][length] = value;
     }
 
-    public static boolean thereIsObstacleAhead(int height, int length) {
+    public boolean thereIsObstacleAhead(int height, int length) {
         if(mapFrame[height][length] == 1 || mapFrame[height][length] == 3) {
             return true;
         } else {
@@ -85,21 +69,19 @@ public class Map {
         }
     }
 
-
-
-    public static int getCurrentColumn() {
+    public int getCurrentColumn() {
         return currentColumn;
     }
 
-    public static int getMapWidth() {
+    public int getMapWidth() {
         return mapWidth;
     }
 
-    public static int getMapLength() {
+    public int getMapLength() {
         return mapLength;
     }
 
-    public static int[][] getMapFrame() {
+    public int[][] getMapFrame() {
         return mapFrame;
     }
 

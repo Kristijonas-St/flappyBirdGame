@@ -8,31 +8,35 @@ import java.awt.event.KeyListener;
 public class Bird {
 
 
-    static int height, length;
-    static boolean birdHasHitObstacle = false;
+    protected int height, length;
+    protected boolean birdHasHitObstacle = false;
 
-    public static void spawnBird() {
-        Map.modifyMap(Map.getMapWidth() / 2, 1, 2);
-        height = Map.getMapWidth() / 2;
+    Map map = new Map();
+
+    public void spawnBird() {
+        map.modifyMap(map.getMapWidth() / 2, 1, 2);
+        height = map.getMapWidth() / 2;
         length = 1;
     }
 
-    public static boolean obstacleDetection(KeyEvent e) {
+
+
+    public boolean obstacleDetection(KeyEvent e) {
         if(birdHasHitObstacle) {
             return true;
-        } else if(Map.thereIsObstacleAhead(height + 1, length) || Map.thereIsObstacleAhead(height, length)  ) {
+        } else if(map.thereIsObstacleAhead(height + 1, length) || map.thereIsObstacleAhead(height, length)  ) {
             return true;
         } else {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                    if(Map.thereIsObstacleAhead(height - 1, length)) {
+                    if(map.thereIsObstacleAhead(height - 1, length)) {
                         birdHasHitObstacle = true;
                     } else {
                         height--;
                     }
                     break;
                 case KeyEvent.VK_DOWN:
-                    if(Map.thereIsObstacleAhead(height + 1, length)) {
+                    if(map.thereIsObstacleAhead(height + 1, length)) {
                         birdHasHitObstacle = true;
                     } else {
                         height++;
@@ -44,62 +48,62 @@ public class Bird {
 
     }
 
-    public static boolean passivelyMoveRight() {
+    public boolean passivelyMoveRight() {
         if (birdHasHitObstacle) {
             return false;
-        } else if (Map.thereIsObstacleAhead(height, length + 1)) {
+        } else if (map.thereIsObstacleAhead(height, length + 1)) {
             birdHasHitObstacle = true;
         } else {
-            Map.modifyMap(height, length, 0);
+            map.modifyMap(height, length, 0);
             length++;
-            Map.modifyMap(height, length, 2);
+            map.modifyMap(height, length, 2);
         }
         return true;
     }
 
-    public static boolean passivelyFallDown() {
+    public boolean passivelyFallDown() {
         if (birdHasHitObstacle) {
             return false;
-        } else if (Map.thereIsObstacleAhead(height + 1, length)) {
+        } else if (map.thereIsObstacleAhead(height + 1, length)) {
             birdHasHitObstacle = true;
         } else {
-            Map.modifyMap(height, length, 0);
+            map.modifyMap(height, length, 0);
             height++;
-            Map.modifyMap(height, length, 2);
+            map.modifyMap(height, length, 2);
         }
         return true;
     }
 
-    public static boolean passesThroughPipes() {
-        int[][] map = Map.getMapFrame();
+    public  boolean passesThroughPipes() {
+        int[][] mapForPipes = map.getMapFrame();
         int currentColumn = length;
 
-        for (int i = 0; i < Map.getMapWidth(); i++) {
-            if (map[i][currentColumn] == 1) {
+        for (int i = 0; i < map.getMapWidth(); i++) {
+            if (mapForPipes[i][currentColumn] == 1) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean crashDown() {
-        int[][] map = Map.getMapFrame();
+    public boolean crashDown() {
+        int[][] mapForPipes = map.getMapFrame();
 
-        if (height + 1 >= Map.getMapWidth() || map[height + 1][length] == 1 || map[height + 1][length] == 3) {
+        if (height + 1 >= map.getMapWidth() || mapForPipes[height + 1][length] == 1 || mapForPipes[height + 1][length] == 3) {
             return false;
         } else {
-            Map.modifyMap(height, length, 0);
+            map.modifyMap(height, length, 0);
             height++;
-            Map.modifyMap(height, length, 2);
+            map.modifyMap(height, length, 2);
             return true;
         }
     }
 
-    public static int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public static int getLength() {
+    public int getLength() {
         return length;
     }
 }

@@ -20,7 +20,6 @@ public class Map {
             }
         }
     }
-
     public void createPipe() {
         int upperPipeTip = 0;
         Random random = new Random();
@@ -40,7 +39,6 @@ public class Map {
 
         }
     }
-
     public void printMapInConsole() {
         for(int i = 0; i < mapWidth; i++){
             for(int j = 0; j < mapLength; j++){
@@ -49,7 +47,6 @@ public class Map {
             System.out.println("\n");
         }
     }
-
     public void generatePipesForWholeMap() {
         while (currentColumn < mapLength) {
             currentColumn += pipesHorizontalGap;
@@ -57,20 +54,33 @@ public class Map {
         }
     }
 
-    public void modifyMap(int height, int length, int value) {
-        mapFrame[height][length] = value;
+    public void modifyBirdPosition(int height, int length, int directionIndex) {
+        clearBirdTrail();
+        setNewBirdLocation(height,length, directionIndex);
+    }
+    public void clearBirdTrail() {
+        for (int i = 0; i < mapWidth; i++) {
+            for (int j = 0; j < mapLength; j++) {
+                if (mapFrame[i][j] == 2) {
+                    mapFrame[i][j] = 0;
+                }
+            }
+        }
+    }
+    public void setNewBirdLocation(int height, int length, int directionIndex) {
+        if (directionIndex == 1 && length + 1 < mapLength) {
+            mapFrame[height][length + 1] = 2;
+        } else if (directionIndex == 2 && height - 1 >= 0) {
+            mapFrame[height - 1][length] = 2;
+        }
     }
 
     public boolean thereIsObstacleAhead(int height, int length) {
-        if(mapFrame[height][length] == 1 || mapFrame[height][length] == 3) {
+        if(mapFrame[height][length + 1] == 1 || mapFrame[height][length + 1] == 3) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public int getCurrentColumn() {
-        return currentColumn;
     }
 
     public int getMapWidth() {

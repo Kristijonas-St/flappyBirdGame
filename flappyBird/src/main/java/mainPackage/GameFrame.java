@@ -42,32 +42,13 @@ public class GameFrame extends JFrame implements KeyListener {
             }
         }
 
-        /*
-        String stringMessage = (Main.gameOver) ? "Game Over, final score: " + Main.score : "EPIC FLAPPY BIRD GAME, score: " + Main.score;
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.BOLD, 24));
-        g.drawString(stringMessage, getWidth() / 2 - 50, yOffset + map.getMapWidth() * cellSize + 50);
-        */
+
     }
 
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int previousLength = bird.getLength();
-        int previousHeight = bird.getHeight();
-
-        /*
-        if (!bird.obstacleDetection(e)) {
-            map.modifyMap(previousHeight, previousLength, 0);
-            map.modifyMap(bird.getHeight(), bird.getLength(), 2);
-            updateGamePanel();
-        }
-
-         */
-    }
-
-    public void updateGamePanel() {
-        repaint();
+        bird.jump(e, map);
     }
 
     @Override

@@ -16,12 +16,16 @@ public class Main {
         GameFrame gameFrame = new GameFrame(map, bird);
 
         bird.spawn(map);
+        map.modifyBirdPosition(bird.getHeight(), bird.getLength(), bird.getDirectionIndex());
 
         while(true) {
-            if(bird.hasHitObstacle()) {
-                break;
+            if(bird.canPassivelyMoveRight(map)) {
+                bird.moveThrough(map);
+                map.modifyBirdPosition(bird.getHeight(), bird.getLength(), bird.getDirectionIndex());
+                gameFrame.repaint();
             } else {
-                bird.moveRight(map, gameFrame);
+                System.out.println("Game over");
+                break;
             }
 
         }

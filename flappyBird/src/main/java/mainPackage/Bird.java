@@ -7,33 +7,23 @@ import java.awt.event.KeyListener;
 
 public class Bird {
 
-
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
-
+    protected int directionIndex = 0;
 
     public void spawn(Map map) {
-        map.modifyMap(map.getMapWidth() / 2, 1, 2);
         height = map.getMapWidth() / 2;
         length = 1;
+        directionIndex = 0;
     }
 
-    public boolean hasHitObstacle() {
-        boolean gameOver = (birdHasHitObstacle) ? true : false;
-        return gameOver;
-    }
-
-    public void moveRight(Map map, GameFrame gameFrame) {
+    public void moveThrough(Map map) {
         if(canPassivelyMoveRight(map)) {
-            map.modifyMap(height, length, 0);
-            length++;
-            map.modifyMap(height, length, 2);
-            delayMovement();
+            moveRight();
+            delayMovement(200);
         } else {
-            birdCrashDown(map);
             birdHasHitObstacle = true;
         }
-        gameFrame.repaint();
     }
     public boolean canPassivelyMoveRight(Map map) {
         if (birdHasHitObstacle) {
@@ -44,24 +34,38 @@ public class Bird {
             return true;
         }
     }
-    public void delayMovement() {
+
+
+    public void moveRight() {
+        length++;
+        directionIndex = 1;
+    }
+    public void delayMovement(int ms) {
         try {
-            Thread.sleep(200);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-    public void birdCrashDown(Map map) {
-        int[][] mapForPipes = map.getMapFrame();
-        while (true) {
-            if (height + 1 >= map.getMapWidth() ||
-                    mapForPipes[height + 1][length] == 1 ||
-                    mapForPipes[height + 1][length] == 3) {
-                break;
+
+    public void jump(KeyEvent e, Map map) {
+        if (canJumpUp(map)) {
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                height -= 1;
+            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                height += 1;
             }
-            map.modifyMap(height, length, 0);
-            height++;
-            map.modifyMap(height, length, 2);
+        } else {
+            birdHasHitObstacle = true;
+        }
+    }
+    public boolean canJumpUp(Map map) {
+        if (birdHasHitObstacle) {
+            return false;
+        } else if (map.thereIsObstacleAhead(height - 1, length)) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -71,5 +75,8 @@ public class Bird {
 
     public int getLength() {
         return length;
+    }
+    public int getDirectionIndex() {
+        return directionIndex;
     }
 }

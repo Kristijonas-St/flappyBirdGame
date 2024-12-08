@@ -9,17 +9,10 @@ public class Bird {
 
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
-    protected int directionIndex = 0; // 1 - right, 2 - up, 3 - crashDown
 
     public void spawn(Map map) {
         height = map.getMapWidth() / 2;
         length = 1;
-        directionIndex = 0;
-    }
-
-    public boolean hasHitObstacle() {
-        boolean result = (birdHasHitObstacle) ? true : false;
-        return result;
     }
 
     public void move(Map map) {
@@ -27,6 +20,7 @@ public class Bird {
             moveRight();
             delayMovement(200);
             slightlyFallDown();
+            countScore(map);
         }
     }
     public boolean canPassivelyMoveRight(Map map) {
@@ -41,7 +35,18 @@ public class Bird {
     }
     public void moveRight() {
         length++;
-        directionIndex = 1;
+    }
+    public void slightlyFallDown() {
+        height++;
+    }
+    public void countScore(Map map) {
+        int[][] mapFrame = map.getMapFrame();
+        for(int i = 0; i < map.getMapWidth(); i++) {
+            if(mapFrame[i][length] == 1) {
+                Main.score++;
+                break;
+            }
+        }
     }
 
     public void jump(KeyEvent e, Map map) {
@@ -63,10 +68,6 @@ public class Bird {
         } else {
             return true;
         }
-    }
-
-    public void slightlyFallDown() {
-        height++;
     }
 
     public void crashDown(Map map, GameFrame gameFrame) {
@@ -97,7 +98,5 @@ public class Bird {
     public int getLength() {
         return length;
     }
-    public int getDirectionIndex() {
-        return directionIndex;
-    }
+
 }

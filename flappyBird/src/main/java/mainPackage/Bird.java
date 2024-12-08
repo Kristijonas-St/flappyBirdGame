@@ -9,7 +9,7 @@ public class Bird {
 
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
-    protected int directionIndex = 0;
+    protected int directionIndex = 0; // 1 - right, 2 - up, 3 - crashDown
 
     public void spawn(Map map) {
         height = map.getMapWidth() / 2;
@@ -17,41 +17,37 @@ public class Bird {
         directionIndex = 0;
     }
 
-    public void moveThrough(Map map) {
+    public boolean hasHitObstacle() {
+        boolean result = (birdHasHitObstacle) ? true : false;
+        return result;
+    }
+
+    public void move(Map map) {
         if(canPassivelyMoveRight(map)) {
             moveRight();
             delayMovement(200);
-        } else {
-            birdHasHitObstacle = true;
+            slightlyFallDown();
         }
     }
     public boolean canPassivelyMoveRight(Map map) {
         if (birdHasHitObstacle) {
             return false;
-        } else if (map.thereIsObstacleAhead(height, length + 1)) {
+        } else if (map.thereIsObstacleAhead(height, length + 1) || map.thereIsObstacleAhead(height - 1, length) || map.thereIsObstacleAhead(height + 1, length)) {
+            birdHasHitObstacle = true;
             return false;
         } else {
             return true;
         }
     }
-
-
     public void moveRight() {
         length++;
         directionIndex = 1;
-    }
-    public void delayMovement(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void jump(KeyEvent e, Map map) {
         if (canJumpUp(map)) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                height -= 1;
+                height -= 2;
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 height += 1;
             }
@@ -66,6 +62,31 @@ public class Bird {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public void slightlyFallDown() {
+        height++;
+    }
+
+    public void crashDown(Map map, GameFrame gameFrame) {
+        int[][] mapFrame = map.getMapFrame();
+
+        while(height < map.getMapWidth()) {
+            if(mapFrame[height][length] == 0) {
+                map.modifyBirdPosition(height, length);
+            }
+            height++;
+            delayMovement(50);
+            gameFrame.repaint();
+        }
+    }
+
+    public void delayMovement(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -54,9 +54,9 @@ public class Map {
         }
     }
 
-    public void modifyBirdPosition(int height, int length, int directionIndex) {
+    public void modifyBirdPosition(int height, int length) {
         clearBirdTrail();
-        setNewBirdLocation(height,length, directionIndex);
+        setNewBirdLocation(height, length);
     }
     public void clearBirdTrail() {
         for (int i = 0; i < mapWidth; i++) {
@@ -67,16 +67,12 @@ public class Map {
             }
         }
     }
-    public void setNewBirdLocation(int height, int length, int directionIndex) {
-        if (directionIndex == 1 && length + 1 < mapLength) {
-            mapFrame[height][length + 1] = 2;
-        } else if (directionIndex == 2 && height - 1 >= 0) {
-            mapFrame[height - 1][length] = 2;
-        }
+    public void setNewBirdLocation(int height, int length) {
+        mapFrame[height][length] = 2;
     }
 
     public boolean thereIsObstacleAhead(int height, int length) {
-        if(mapFrame[height][length + 1] == 1 || mapFrame[height][length + 1] == 3) {
+        if(mapFrame[height][length] == 1 || mapFrame[height][length] == 3) {
             return true;
         } else {
             return false;

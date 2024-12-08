@@ -10,9 +10,9 @@ public class Bird {
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
 
-    public void spawn(Map map) {
-        height = map.getMapWidth() / 2;
-        length = 1;
+    public void spawn(int givenHeight, int givenLength) {
+        height = givenHeight;
+        length = givenLength;
     }
 
     public void move(Map map) {

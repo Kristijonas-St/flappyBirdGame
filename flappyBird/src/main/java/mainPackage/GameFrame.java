@@ -41,7 +41,7 @@ public class GameFrame extends JFrame implements KeyListener {
                 }
             }
         }
-        
+
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 24));
         g.drawString("Score: " + Main.score, getWidth() / 2 - 50, yOffset + map.getMapWidth() * cellSize + 50);

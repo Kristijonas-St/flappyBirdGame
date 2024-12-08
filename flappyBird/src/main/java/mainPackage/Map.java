@@ -90,6 +90,4 @@ public class Map {
     public int[][] getMapFrame() {
         return mapFrame;
     }
-
-
 }

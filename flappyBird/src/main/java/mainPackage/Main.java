@@ -13,7 +13,7 @@ public class Main {
 
         GameFrame gameFrame = new GameFrame(map, bird);
 
-        bird.spawn(map);
+        bird.spawn(map.getMapWidth() / 2, 1);
         map.modifyBirdPosition(bird.getHeight(), bird.getLength());
 
         while(bird.canPassivelyMoveRight(map)) {
@@ -23,6 +23,8 @@ public class Main {
         }
         bird.crashDown(map, gameFrame);
         System.out.println("Game over");
+
     }
+
 }
 

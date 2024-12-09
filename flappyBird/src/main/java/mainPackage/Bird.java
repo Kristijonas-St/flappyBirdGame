@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Bird {
-
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
+
 
     public void spawn(int givenHeight, int givenLength) {
         height = givenHeight;

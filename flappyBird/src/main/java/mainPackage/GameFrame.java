@@ -9,6 +9,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private Map map;
     private Bird bird;
 
+
     public GameFrame(Map map, Bird bird) {
         this.map = map;
         this.bird = bird;
@@ -47,7 +48,6 @@ public class GameFrame extends JFrame implements KeyListener {
         g.drawString("Score: " + Main.score, getWidth() / 2 - 50, yOffset + map.getMapWidth() * cellSize + 50);
 
     }
-
 
     @Override
     public void keyPressed(KeyEvent e) {

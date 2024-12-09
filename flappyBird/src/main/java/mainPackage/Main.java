@@ -15,10 +15,10 @@ public class Main {
             bird.move(map);
             map.modifyBirdPosition(bird.getHeight(), bird.getLength());
             gameFrame.repaint();
+            bird.countScore(map);
         }
         bird.crashDown(map, gameFrame);
         System.out.println("Game over");
     }
-
 }
 

@@ -5,10 +5,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Bird {
+public class Bird implements Observer {
     protected int height, length;
     protected boolean birdHasHitObstacle = false;
-
 
     public void spawn(int givenHeight, int givenLength) {
         height = givenHeight;
@@ -20,7 +19,6 @@ public class Bird {
             moveRight();
             delayMovement(200);
             slightlyFallDown();
-            countScore(map);
         }
     }
     public boolean canPassivelyMoveRight(Map map) {
@@ -38,15 +36,6 @@ public class Bird {
     }
     public void slightlyFallDown() {
         height++;
-    }
-    public void countScore(Map map) {
-        int[][] mapFrame = map.getMapFrame();
-        for(int i = 0; i < map.getMapWidth(); i++) {
-            if(mapFrame[i][length] == 1) {
-                Main.score++;
-                break;
-            }
-        }
     }
 
     public void jump(KeyEvent e, Map map) {
@@ -70,6 +59,25 @@ public class Bird {
         }
     }
 
+    public void delayMovement(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void countScore(Map map) {
+        int[][] mapFrame = map.getMapFrame();
+        for(int i = 0; i < map.getMapWidth(); i++) {
+            if(mapFrame[i][length] == 1) {
+                Main.score++;
+                break;
+            }
+        }
+    }
+
     public void crashDown(Map map, GameFrame gameFrame) {
         int[][] mapFrame = map.getMapFrame();
 
@@ -80,14 +88,6 @@ public class Bird {
             height++;
             delayMovement(50);
             gameFrame.repaint();
-        }
-    }
-
-    public void delayMovement(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 

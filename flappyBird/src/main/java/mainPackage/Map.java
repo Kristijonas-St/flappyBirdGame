@@ -20,6 +20,12 @@ public class Map {
             }
         }
     }
+    public void generatePipesForWholeMap() {
+        while (currentColumn < mapLength) {
+            currentColumn += pipesHorizontalGap;
+            createPipe();
+        }
+    }
     public void createPipe() {
         int upperPipeTip = 0;
         Random random = new Random();
@@ -29,7 +35,6 @@ public class Map {
                 mapFrame[i][currentColumn] = 1;
             }
             upperPipeTip = random.nextInt(mapWidth - 5) + 1;
-
 
             for (int i = 0; i < pipesVerticalGap; i++) {
                 if (upperPipeTip + i < mapWidth - 1) {
@@ -47,12 +52,7 @@ public class Map {
             System.out.println("\n");
         }
     }
-    public void generatePipesForWholeMap() {
-        while (currentColumn < mapLength) {
-            currentColumn += pipesHorizontalGap;
-            createPipe();
-        }
-    }
+
 
     public void modifyBirdPosition(int height, int length) {
         clearBirdTrail();
